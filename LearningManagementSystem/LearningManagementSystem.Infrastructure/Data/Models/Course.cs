@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LearningManagementSystem.Infrastructure.Data.Models
 {
@@ -10,6 +11,7 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
             Discussions = new HashSet<Discussion>();
             Topics = new HashSet<Topic>();
             Announcements = new HashSet<Announcement>();
+            Students = new HashSet<User>();
         }
 
         [Key]
@@ -26,6 +28,10 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
         [Required]
         public string ImageUrl { get; set; }
 
+        [ForeignKey(nameof(Teacher))]
+        public string TeacherId { get; set; }
+        public User Teacher { get; set; }
+
         public ICollection<Assignment> Assignments { get; set; }
 
         public ICollection<Discussion> Discussions { get; set; }
@@ -33,7 +39,7 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
         public ICollection<Topic> Topics { get; set; }
 
 
-        //public ICollection<Discussion> Students { get; set; }
+        public ICollection<User> Students { get; set; }
 
         public ICollection<Announcement> Announcements { get; set; }
     }
