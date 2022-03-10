@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LearningManagementSystem.Infrastructure.Data.Models
 {
-    public class User : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        public User()
+        public ApplicationUser()
         {
             Trainings = new HashSet<Course>();
-            Courses = new HashSet<UserCourse>();
+            Courses = new HashSet<StudentCourse>();
 
         }
 
@@ -22,6 +22,6 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
 
         public ICollection<Course> Trainings { get; set; }
 
-        public ICollection<UserCourse> Courses { get; set; }
+        public ICollection<StudentCourse> Courses { get; set; }
     }
 }

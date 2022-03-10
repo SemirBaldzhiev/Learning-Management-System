@@ -11,7 +11,7 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
             Discussions = new HashSet<Discussion>();
             Topics = new HashSet<Topic>();
             Announcements = new HashSet<Announcement>();
-            Students = new HashSet<User>();
+            Students = new HashSet<StudentCourse>();
         }
 
         [Key]
@@ -30,7 +30,7 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
 
         [ForeignKey(nameof(Teacher))]
         public string TeacherId { get; set; }
-        public User Teacher { get; set; }
+        public ApplicationUser Teacher { get; set; }
 
         public ICollection<Assignment> Assignments { get; set; }
 
@@ -38,8 +38,7 @@ namespace LearningManagementSystem.Infrastructure.Data.Models
 
         public ICollection<Topic> Topics { get; set; }
 
-
-        public ICollection<User> Students { get; set; }
+        public ICollection<StudentCourse> Students { get; set; }
 
         public ICollection<Announcement> Announcements { get; set; }
     }

@@ -2,11 +2,11 @@
 
 namespace LearningManagementSystem.Infrastructure.Data.Models
 {
-    public class UserCourse
+    public class StudentCourse
     {
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
-        public User User { get; set; }
+        [ForeignKey(nameof(Student))]
+        public string StudentId { get; set; }
+        public ApplicationUser Student { get; set; }
 
         [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }

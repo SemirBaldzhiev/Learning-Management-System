@@ -22,18 +22,28 @@ namespace LearningManagementSystem.Infrastructure.Data
         public DbSet<TextMaterial> TextMaterials { get; set; }
         public DbSet<Topic> Topics { get; set; }
 
-        // public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-        public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<UserCourse>(e =>
-            {
-                e.HasKey(us => new { us.UserId, us.CourseId });
-            });
+
+            builder.Entity<StudentCourse>()
+                        .HasKey(sc => new { sc.StudentId, sc.CourseId });
+            builder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Student)
+                .WithMany(s => s.Courses)
+                .HasForeignKey(sc => sc.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Course)
+                .WithMany(c => c.Students)
+                .HasForeignKey(sc => sc.CourseId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
