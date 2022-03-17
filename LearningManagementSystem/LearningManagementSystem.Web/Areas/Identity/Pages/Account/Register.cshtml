@@ -31,13 +31,22 @@
       <p class="login-box-msg">Register a new membership</p>
 
       <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div>
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+          <div class="input-group mb-3">
+            
+           <select asp-for="Input.SelectedRoleId" class="form-control" asp-items="@Model.RolesList" required>
+               <option value="0">-Select User Type-</option>
+           </select>
+           <input type="hidden" name="SelectedRoleName"/>
+           
+         </div>
+          <div>
+            <span asp-validation-for="Input.Username" class="text-danger"></span>
           </div> 
           <div class="input-group mb-3">
             
-          <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Name"/>
+          <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" placeholder="Username"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -47,17 +56,19 @@
       </div>
         <div>
             <span asp-validation-for="Input.Email" class="text-danger"></span>
-          </div>  
-        <div class="input-group mb-3">
-          <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email"/>
+          </div> 
+          <div class="input-group mb-3">
+            
+          <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="Email"/>
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
           
       </div>
-     <div class="input-group-append">
+       
+     <div>
             <span asp-validation-for="Input.Password" class="text-danger"></span>
           </div> 
         <div class="input-group mb-3">
@@ -66,12 +77,11 @@
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
-            
           
-          </div class="input-group-append">      
+          </div>      
           
       </div>
-      <div class="input-group-append">
+      <div>
             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
           </div>
         <div class="input-group mb-3">
@@ -83,9 +93,29 @@
             </div>
             
           </div>
-         
 
         </div>
+         <div>
+            <span asp-validation-for="Input.Name" class="text-danger"></span>
+          </div>  
+        <div class="input-group mb-3">
+          <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" placeholder="Name"/>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+          
+      </div>
+         <div>
+            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+          </div>  
+        <div class="input-group mb-3">
+          
+          <input type="radio" asp-for="Input.Gender" value="Male" id="GenderMale" />Male
+          <input type="radio" asp-for="Input.Gender" value="Female" id="GenderFemale" />Female
+
+      </div>
         <div class="row">
           <!-- /.col -->
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
