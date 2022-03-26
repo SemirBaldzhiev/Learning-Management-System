@@ -6,5 +6,7 @@ namespace LearningManagementSystem.Core.Contracts
     {
         Task<int> CreateCourse(CreateCourseViewModel course);
         Task<CourseQueryViewModel> All();
+
+        Task<DetailsViewModel> Details(int corseId);
     }
 }
