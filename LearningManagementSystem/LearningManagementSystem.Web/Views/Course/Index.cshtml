@@ -9,13 +9,13 @@
     <h1 class="display-4">All Courses</h1>
 </div>
 
-<div>
-    <a class="nav-link" asp-area="" asp-controller="Course" asp-action="Add">
-        <button type="button" class="btn btn-outline-primary">Add+</button>
+<div class="ml-2">
+    <a asp-area="" asp-controller="Course" asp-action="Add">
+        <input type="button" class="btn btn-outline-primary" value="Add+" />
     </a>
 </div>
 
-<div class="container">
+<div class="container mt-3">
     <div class="row g-4">
         @foreach (var course in Model.Courses)
         {
@@ -25,7 +25,15 @@
                     <div class="card-body">
                         <h5 class="card-title">@course.Title</h5>
                         <p class="card-text">@course.Description</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        @if (User.IsInRole("Student"))
+                        {
+                            <a class="nav-link" asp-area="" asp-controller="Course" asp-action="Details"><input type="button" class="btn btn-primary" value="Enter & Learn"/></a>
+                        }
+                        @if (User.IsInRole("Teacher"))
+                        {
+                            <a asp-area="" asp-controller="Course" asp-action="Details"><input type="button" class="btn btn-primary" value="Enter & Edit"/></a>
+                            <a asp-area="" asp-controller="Course" asp-action="Delete"><input type="button" class="btn btn-primary" value="Delete"/></a>
+                        }
                     </div>
                 </div>
             </div>
