@@ -1,0 +1,38 @@
+﻿@using LearningManagementSystem.Core.Models.Course
+@model DetailsViewModel
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <strong>Description</strong>
+            </h3>
+        </div>
+
+        <div class="card-body">
+            <dl>
+                <dd>@Model.Description</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <strong>Latest Announcement</strong>
+            </h3>
+        </div>
+
+        <div class="card-body">
+            <dl>
+                <dd>@Model.LatestAnnouncement</dd>
+            </dl>
+        </div>
+    </div>
+</div>

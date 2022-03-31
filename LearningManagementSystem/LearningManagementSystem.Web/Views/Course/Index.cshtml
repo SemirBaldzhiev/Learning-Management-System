@@ -27,12 +27,12 @@
                         <p class="card-text">@course.Description</p>
                         @if (User.IsInRole("Student"))
                         {
-                            <a class="nav-link" asp-area="" asp-controller="Course" asp-action="Details"><input type="button" class="btn btn-primary" value="Enter & Learn"/></a>
+                            <a class="btn-sm btn-info" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">Enter & Learn</a>
                         }
                         @if (User.IsInRole("Teacher"))
                         {
-                            <a asp-area="" asp-controller="Course" asp-action="Details"><input type="button" class="btn btn-primary" value="Enter & Edit"/></a>
-                            <a asp-area="" asp-controller="Course" asp-action="Delete"><input type="button" class="btn btn-primary" value="Delete"/></a>
+                            <a class="btn-sm btn-info" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">Enter & Edit</a>
+                            <a class="btn-sm btn-danger" asp-action="Delete" asp-route-id="@course.Id">Delete</a>
                         }
                     </div>
                 </div>
