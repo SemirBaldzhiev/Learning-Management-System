@@ -38,5 +38,17 @@ namespace LearningManagementSystem.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();  
+            }
+
+            var courseDetailsModel = await courseService.Details(id);
+
+            return View(courseDetailsModel);
+        }
     }
 }
