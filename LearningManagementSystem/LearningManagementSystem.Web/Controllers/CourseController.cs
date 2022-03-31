@@ -31,7 +31,7 @@ namespace LearningManagementSystem.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Add", "Course");
+                return View(model);
             }
 
             await courseService.CreateCourse(model);
@@ -49,6 +49,36 @@ namespace LearningManagementSystem.Web.Controllers
             var courseDetailsModel = await courseService.Details(id);
 
             return View(courseDetailsModel);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            var model = await courseService.GetCourseById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CourseViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool isEdited = await courseService.Edit(model);
+
+            if (!isEdited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
