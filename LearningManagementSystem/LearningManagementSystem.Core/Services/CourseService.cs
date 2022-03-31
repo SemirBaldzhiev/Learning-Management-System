@@ -45,6 +45,7 @@ namespace LearningManagementSystem.Core.Services
                 Courses = await repo.All<Course>()
                     .Select(c => new CourseViewModel
                     {
+                        Id = c.Id,
                         Title = c.Title,
                         Description = c.Description,
                         ImageUrl = c.ImageUrl
@@ -56,9 +57,9 @@ namespace LearningManagementSystem.Core.Services
             return courses;
         }
 
-        public async Task<DetailsViewModel> Details(int corseId)
+        public async Task<DetailsViewModel> Details(int? id)
         {
-            var course = await repo.GetByIdAsync<Course>(corseId);
+            var course = await repo.GetByIdAsync<Course>(id);
 
             var latestAnn = course.Announcements.LastOrDefault();
 
@@ -82,20 +83,49 @@ namespace LearningManagementSystem.Core.Services
                 })
                 .ToList();
 
-            var model = new DetailsViewModel()
-            {
-                Title = course.Title,
-                Description = course.Description,
-                LatestAnnouncement = new AnnouncementViewModel()
+            var latestAnnModel = course.Announcements
+                .Select(a => new AnnouncementViewModel()
                 {
                     Title = latestAnn.Title,
                     Content = latestAnn.Content,
                     LastUpdated = latestAnn.LastUpdated
-                },
+                })
+                .FirstOrDefault();
+
+            var model = new DetailsViewModel()
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                LatestAnnouncement = latestAnnModel,
                 Topics = topicsModel
             };
 
             return model;
         }
+
+        public async Task Delete(int courseId)
+        {
+            await repo.DeleteAsync<Course>(courseId);
+        }
+
+        public async Task<bool> Edit(int id)
+        {
+            var course = await repo.GetByIdAsync<Course>(id);
+
+            if (course == null)
+            {
+                return false;
+            }
+
+            repo.Update(course);
+
+            await repo.SaveChangesAsync();
+
+            return true;
+        }
+
+
+
     }
 }
