@@ -1,32 +1,34 @@
 ﻿@using LearningManagementSystem.Core.Models.Course
-@model CreateCourseViewModel 
+@model CourseViewModel
 
 @{
-    ViewData["Title"] = "Add Course";
+    ViewData["Title"] = "Edit Course";
 }
+
 
 <div class="card card-primary">
     <div class="card-header">
-        <h3 class="card-title">Add Course</h3>
+        <h3 class="card-title">Edit Course</h3>
     </div>
 
-    <form asp-action="Add" method="post">
+    <form asp-action="Edit" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
         <div class="card-body">
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" placeholder="Title" />
+                <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control" placeholder="Description" ></textarea>
+                <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
         </div>
 
         <div class="card-footer">
-            <input type="submit" value="Submit" class="btn btn-primary" />
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </form>
 </div>

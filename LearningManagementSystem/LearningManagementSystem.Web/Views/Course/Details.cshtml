@@ -5,6 +5,14 @@
     ViewData["Title"] = "Course Details";
 }
 
+
+@if (User.IsInRole("Teacher"))
+{
+   <a class="btn-sm btn-info" asp-controller="Course" asp-action="Edit" asp-route-id="@Model.Id">Enter & Edit</a>
+}
+
+<a class="btn-sm btn-info" asp-controller="Course" asp-action="Edit" asp-route-id="@Model.Id">Enter & Edit</a>
+
 <div>
     <div class="card">
         <div class="card-header">
@@ -36,3 +44,30 @@
         </div>
     </div>
 </div>
+
+
+@foreach (var topic in Model.Topics)
+{
+    <div class="row">
+        <h3>@topic.Title</h3>
+        <div class="col-6">
+            <h4>File materials</h4>
+            @foreach (var fMaterial in topic.FileMaterials)
+            {
+                <div>
+                    <p>@fMaterial.FileName</p>
+                </div>
+            }
+        </div>
+        <div class="col-6">
+            <h4>Text materials</h4>
+            @foreach (var tMaterial in topic.TextMaterials)
+            {
+                <div>
+                    <p>@tMaterial.Content</p>
+                </div>
+            }
+        </div>
+    </div>
+}
+
