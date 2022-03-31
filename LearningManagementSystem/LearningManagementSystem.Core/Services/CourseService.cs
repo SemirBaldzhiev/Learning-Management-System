@@ -140,5 +140,17 @@ namespace LearningManagementSystem.Core.Services
 
             return courseModel;
         }
+
+        public async Task<bool> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return false;
+            }
+
+            await repo.DeleteAsync<Course>(id);
+
+            return true;
+        }
     }
 }
