@@ -11,6 +11,8 @@ namespace LearningManagementSystem.Core.Contracts
 
         Task Delete(int id);
 
-        Task<bool> Edit(int id);
+        Task<bool> Edit(CourseViewModel model);
+
+        Task<CourseViewModel> GetCourseById(int? id);
     }
 }
