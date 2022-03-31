@@ -80,5 +80,19 @@ namespace LearningManagementSystem.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            bool isDeleted = await courseService.Delete(id);
+
+            if (!isDeleted)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
