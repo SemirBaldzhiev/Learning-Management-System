@@ -109,11 +109,14 @@ namespace LearningManagementSystem.Core.Services
             await repo.DeleteAsync<Course>(courseId);
         }
 
-        public async Task<bool> Edit(int id)
+        public async Task<bool> Edit(CourseViewModel model)
         {
-            var course = await repo.GetByIdAsync<Course>(id);
+            var course = await repo.GetByIdAsync<Course>(model.Id);
 
-            if (course == null)
+            course.Title = model.Title;
+            course.Description = model.Description;
+
+            if (model == null)
             {
                 return false;
             }
@@ -125,7 +128,17 @@ namespace LearningManagementSystem.Core.Services
             return true;
         }
 
+        public async Task<CourseViewModel> GetCourseById(int? id)
+        {
+            var course = await repo.GetByIdAsync<Course>(id);
 
+            var courseModel = new CourseViewModel()
+            {
+                Title = course.Title,
+                Description = course.Description
+            };
 
+            return courseModel;
+        }
     }
 }
