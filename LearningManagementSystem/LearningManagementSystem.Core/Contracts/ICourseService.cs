@@ -16,5 +16,7 @@ namespace LearningManagementSystem.Core.Contracts
         Task<CourseViewModel> GetCourseById(int? id);
 
         Task<bool> Delete(int? id);
+
+        Task<bool> Enroll(int courseId, string studentId);
     }
 }

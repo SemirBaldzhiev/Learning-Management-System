@@ -152,5 +152,35 @@ namespace LearningManagementSystem.Core.Services
 
             return true;
         }
+
+        public async Task<bool> Enroll(int courseId, string studentId)
+        {
+            var course = await repo.GetByIdAsync<Course>(courseId);
+
+            if (course == null)
+            {
+                return false;
+            }
+
+            var student = await repo.GetByIdAsync<ApplicationUser>(studentId);
+
+            if (student == null)
+            {
+                return false;
+            }
+
+            var stuedntCourse = new StudentCourse()
+            {
+                StudentId = studentId,
+                CourseId = courseId,
+                Student = student,
+                Course = course,
+            };
+
+            course.Students.Add(stuedntCourse);
+            await repo.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
