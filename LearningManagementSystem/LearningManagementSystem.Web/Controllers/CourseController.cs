@@ -2,6 +2,7 @@
 using LearningManagementSystem.Core.Models.Course;
 using LearningManagementSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LearningManagementSystem.Web.Controllers
 {
@@ -92,6 +93,20 @@ namespace LearningManagementSystem.Web.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Enroll(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            bool isEnrolled = await courseService.Enroll(id, userId);
+
+            if (!isEnrolled)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(Details));
         }
 
     }
