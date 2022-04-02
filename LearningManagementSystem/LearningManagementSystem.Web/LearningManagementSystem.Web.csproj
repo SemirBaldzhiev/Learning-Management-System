@@ -27,8 +27,4 @@
     <ProjectReference Include="..\LearningManagementSystem.Core\LearningManagementSystem.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Announcement\" />
-  </ItemGroup>
-
 </Project>

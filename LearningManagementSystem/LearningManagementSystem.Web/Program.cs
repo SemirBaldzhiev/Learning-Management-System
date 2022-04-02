@@ -18,6 +18,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICourseService, CourseService>()
+                .AddScoped<IAnnouncementService, AnnouncementService>()
                 .AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
 
 var app = builder.Build();
@@ -43,6 +44,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();
