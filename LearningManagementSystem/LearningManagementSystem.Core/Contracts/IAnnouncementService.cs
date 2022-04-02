@@ -10,5 +10,11 @@ namespace LearningManagementSystem.Core.Contracts
     public interface IAnnouncementService
     {
         Task<int> Create(CreateAnnouncementViewModel model);
+
+        Task<bool> Edit(EditAnnouncementViewModel model);
+
+        Task<bool> Delete(int? id);
+
+        Task<AllAnnouncementsViewModel> All();
     }
 }
