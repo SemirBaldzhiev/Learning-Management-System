@@ -104,11 +104,7 @@ namespace LearningManagementSystem.Core.Services
             return model;
         }
 
-        public async Task Delete(int courseId)
-        {
-            await repo.DeleteAsync<Course>(courseId);
-        }
-
+       
         public async Task<bool> Edit(CourseViewModel model)
         {
             var course = await repo.GetByIdAsync<Course>(model.Id);
